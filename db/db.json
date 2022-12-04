@@ -1,10 +1,8 @@
 {
   "tasks": [
-    {"id": 1, "name": "Tarefa", "completed": false},
-    {"id": 2, "name": "Tarefa", "completed": false},
-    {"id": 3, "name": "Tarefa", "completed": false},
-    {"id": 4, "name": "Tarefa", "completed": false},
-    {"id": 5, "name": "inacio", "completed": false}
+    {"id": 1, "name": "Tarefa", "completed": true, "_locals": {}},
+    {"id": 2, "name": "Tarefa1", "completed": false},
+    {"id": 3, "name": "Tarefa2", "completed": false}
   ],
   "_locals": {}
 }

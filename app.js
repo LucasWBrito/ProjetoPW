@@ -16,12 +16,10 @@ app.use(express.urlencoded({extended: false}));
 // routes
 app.get('/api/v1/tasks', (req, res) => {
   res.render('main', db);
-  //res.json(db);
 });
 
 app.post('/api/v1/tasks', (req, res) => {
   const {name} = req.body;
-  console.log(req.body);
   let newID = db.tasks.length ? db.tasks[db.tasks.length - 1].id + 1 : 1;
   let newTask = {
     id: newID,
@@ -31,7 +29,6 @@ app.post('/api/v1/tasks', (req, res) => {
   db.tasks.push(newTask);
   writeFileSync('./db/db.json', JSON.stringify(db));
   res.redirect('/api/v1/tasks');
-  //res.json(req.body);
 });
 
 app.get('/api/v1/tasks/edit/:id', (req, res) => {
@@ -48,7 +45,7 @@ app.patch('/api/v1/tasks/complete/:id', (req, res) => {
   if (db.tasks[taskIndex].completed) db.tasks[taskIndex].completed = false;
   else db.tasks[taskIndex].completed = true;
   writeFileSync('./db/db.json', JSON.stringify(db));
-  res.redirect('/api/v1/tasks');
+  res.status(200).json({completed: db.tasks[taskIndex].completed, url: '/api/v1/tasks/'});
 });
 
 app.put('/api/v1/tasks/edit/:id', (req, res) => {
@@ -66,19 +63,19 @@ app.put('/api/v1/tasks/edit/:id', (req, res) => {
   res.redirect('/api/v1/tasks');
 });
 
-app.delete('/api/v1/tasks/:id', (req, res) => {
+app.delete('/api/v1/tasks/delete/:id', (req, res) => {
   const {id} = req.params;
   let taskIndex = db.tasks.findIndex((task) => task.id == id);
   db.tasks.splice(taskIndex, 1);
   writeFileSync('./db/db.json', JSON.stringify(db));
-  res.redirect('/api/v1/tasks');
+  res.status(200).send('/api/v1/tasks');
 });
 
 //app.get('/api/v1/tasks)         -lista todas tarefas
 //app.post('/api/v1/tasks')       -cria nova tarefa
-//app.get('/api/v1/tasks/edit')     -mostra detalhes task
-//app.patch('/api/v1/tasks/complete:id')   -completaTask
+//app.get('/api/v1/tasks/edit/:id')     -mostra detalhes task editar
+//app.patch('/api/v1/tasks/complete:id')   -completeTask
 //app.put('/api/v1/tasks/edit:id')   -modifica tarefa
-//app.delete('/api/v1/tarefas:id')    -deleta tarefa
+//app.delete('/api/v1/tasks/delete/:id')    -deleta tarefa
 
 app.listen(port, console.log(`Server listening on ${port}`));

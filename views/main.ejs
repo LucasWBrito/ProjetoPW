@@ -23,7 +23,9 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="text-center text-secondary">Lista de Tarefas</h1>
+      <h1 class="text-center text-secondary mt-4">
+        <a href="/api/v1/tasks"> <img src="/svg/icon.svg" style="width: 50px" /> Lista de Tarefas </a>
+      </h1>
       <hr class="border border-primary border-3 opacity-75" />
       <div class="w-50 mx-auto">
         <!--form-->
@@ -32,32 +34,48 @@
             <input
               type="text"
               name="name"
-              class="form-control"
+              class="form-control fs-4"
               placeholder="Tarefa"
               aria-label="Tarefa"
               aria-describedby="button-addon2"
               required
             />
-            <button type="submit" class="btn btn-outline-primary" id="button-addon2">Adicionar</button>
+            <button type="submit" class="btn btn-outline-primary" id="button-addon2">
+              <i class="fas fa-plus fa-2x mt-1"></i>
+            </button>
           </div>
         </form>
         <!--tarefas-->
         <ul class="list-group text-center" id="getTasks">
           <% tasks.forEach((task) => { %>
           <li class="list-group-item">
-            <div>
-              <a onclick="completeTask('<%=task.id%>')" class="text-decoration-none">
-                <i class="fa fa-circle fa-hover-hidden float-start mt-1 fa-2x text-secondary"></i>
-                <i class="fa fa-check-circle fa-hover-show mt-1 float-start fa-2x text-success"></i>
-              </a>
-              <span class="getTask"><%=task.name%> </span>
-              <a onclick="completeTask('<%=task.id%>')" class="text-decoration-none">
-                <i class="far fa-trash-alt fa-2x float-end px-1 mt-1 text-danger"></i>
-              </a>
-              <a href="/api/v1/tasks/<%=task.id%>" class="text-decoration-none">
-                <i class="far fa-edit float-end fa-2x px-1 mt-1 text-info"></i>
-              </a>
-            </div>
+            <% if(task.completed) { %>
+            <a
+              onclick="completeTask('<%=task.id%>')"
+              href=""
+              class="text-decoration-none text-dark fa-stack float-start"
+            >
+              <i class="fa fa-circle mt-1 fa-stack-2x text-secondary invisible"></i>
+              <i class="fa fa-check-circle mt-1 fa-stack-2x text-success"></i>
+            </a>
+            <span class="getTask fs-4 text-decoration-line-through"><%=task.name%> </span>
+            <% } else { %>
+            <a
+              onclick="completeTask('<%=task.id%>')"
+              href=""
+              class="text-decoration-none text-dark fa-stack float-start"
+            >
+              <i class="fa fa-circle mt-1 fa-stack-2x text-secondary"></i>
+              <i class="fa fa-check-circle mt-1 fa-stack-2x text-success invisible"></i>
+            </a>
+            <span class="getTask fs-4"><%=task.name%> </span>
+            <% } %>
+            <a onclick="deleteTask('<%=task.id%>')" href="" class="text-decoration-none">
+              <i class="far fa-trash-alt fa-2x float-end px-1 mt-1 text-danger"></i>
+            </a>
+            <a href="/api/v1/tasks/edit/<%=task.id%>" class="text-decoration-none">
+              <i class="far fa-edit float-end fa-2x px-1 mt-1 text-info"></i>
+            </a>
           </li>
           <%});%>
         </ul>
@@ -65,7 +83,7 @@
     </div>
   </body>
 </html>
-<script src="/js/script.js"></script>
+<script src="/js/mainScript.js"></script>
 <!--Bootstrap-->
 <script
   src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
