@@ -50,21 +50,13 @@
           <% tasks.forEach((task) => { %>
           <li class="list-group-item">
             <% if(task.completed) { %>
-            <a
-              onclick="completeTask('<%=task.id%>')"
-              href=""
-              class="text-decoration-none text-dark fa-stack float-start"
-            >
+            <a onclick="completeTask('<%=task.id%>')" href="" class="text-decoration-none fa-stack float-start">
               <i class="fa fa-circle mt-1 fa-stack-2x text-secondary invisible"></i>
               <i class="fa fa-check-circle mt-1 fa-stack-2x text-success"></i>
             </a>
-            <span class="getTask fs-4 text-decoration-line-through"><%=task.name%> </span>
+            <span class="getTask fs-4 text-decoration-line-through text-muted"><%=task.name%> </span>
             <% } else { %>
-            <a
-              onclick="completeTask('<%=task.id%>')"
-              href=""
-              class="text-decoration-none text-dark fa-stack float-start"
-            >
+            <a onclick="completeTask('<%=task.id%>')" href="" class="text-decoration-none fa-stack float-start">
               <i class="fa fa-circle mt-1 fa-stack-2x text-secondary"></i>
               <i class="fa fa-check-circle mt-1 fa-stack-2x text-success invisible"></i>
             </a>
