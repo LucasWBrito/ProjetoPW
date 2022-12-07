@@ -14,10 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // routes
+
+//getTasks
 app.get('/api/v1/tasks', (req, res) => {
   res.render('main', db);
 });
-
+// createTask
 app.post('/api/v1/tasks', (req, res) => {
   const {name} = req.body;
   let newID = db.tasks.length ? db.tasks[db.tasks.length - 1].id + 1 : 1;
@@ -30,16 +32,14 @@ app.post('/api/v1/tasks', (req, res) => {
   writeFileSync('./db/db.json', JSON.stringify(db));
   res.redirect('/api/v1/tasks');
 });
-
+// getEditTask
 app.get('/api/v1/tasks/edit/:id', (req, res) => {
-  //render editTask
   let {id} = req.params;
   let task = db.tasks.find((task) => task.id == id);
   res.render('edit', task);
 });
-
+// completeTask
 app.patch('/api/v1/tasks/complete/:id', (req, res) => {
-  // completeTask
   const {id} = req.params;
   let taskIndex = db.tasks.findIndex((task) => task.id == id);
   if (db.tasks[taskIndex].completed) db.tasks[taskIndex].completed = false;
@@ -47,22 +47,19 @@ app.patch('/api/v1/tasks/complete/:id', (req, res) => {
   writeFileSync('./db/db.json', JSON.stringify(db));
   res.status(200).json({completed: db.tasks[taskIndex].completed, url: '/api/v1/tasks/'});
 });
-
+// editTask
 app.put('/api/v1/tasks/edit/:id', (req, res) => {
-  // editTask
   const {id} = req.params;
   const {name, completed} = req.body;
-  console.log(name);
   let taskIndex = db.tasks.findIndex((task) => task.id == id);
-  console.log(taskIndex);
-  console.log(db.tasks[taskIndex]);
+
   db.tasks[taskIndex].name = name;
   db.tasks[taskIndex].completed = completed;
-  console.log(db.tasks[taskIndex]);
-  writeFileSync('./db/db.json', JSON.stringify(db));
-  res.redirect('/api/v1/tasks');
-});
 
+  writeFileSync('./db/db.json', JSON.stringify(db));
+  res.status(200).json({url: `/api/v1/tasks/edit/${id}`});
+});
+// deleteTask
 app.delete('/api/v1/tasks/delete/:id', (req, res) => {
   const {id} = req.params;
   let taskIndex = db.tasks.findIndex((task) => task.id == id);

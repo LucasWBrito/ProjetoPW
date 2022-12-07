@@ -1,5 +1,3 @@
-let taskDOM = document.querySelector('.getTask');
-
 async function completeTask(id) {
   let response = await fetch(`/api/v1/tasks/complete/${id}`, {
     method: 'PATCH',

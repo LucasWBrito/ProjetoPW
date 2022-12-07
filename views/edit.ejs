@@ -29,33 +29,36 @@
       <hr class="border border-primary border-3 opacity-75" />
       <div class="w-50 mx-auto">
         <!--form-->
-        <div class="card">
-          <div class="card-body">
-            <label for="name">Id:<%=id%></label>
-            <form name="editTask" onsubmit="editTask('<%=id%>')">
+        <form class="editTask">
+          <div class="card">
+            <div class="card-header input-group">
+              <span class="input-group-text">ID:</span>
+              <input type="number" class="form-control id" name="id" value="<%=id%>" disabled readonly />
+            </div>
+            <div class="card-body">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" name="name" value="<%=name%>" />
+                <input class="name form-control" name="name" value="<%=name%>" placeholder="Tarefa" />
                 <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
               <div class="form-check form-switch">
                 <% if(completed) { %>
-                <input name="completed" class="form-control form-check-input" type="checkbox" role="switch" checked />
+                <input name="completed" class="completed form-check-input" type="checkbox" checked />
                 <% } else { %>
-                <input name="completed" class="form-control form-check-input" type="checkbox" role="switch" />
+                <input name="completed" class="completed form-check-input" type="checkbox" />
                 <% } %>
-                <label class="form-check-label">Tarefa Completa?</label>
+                <label for="completed form-check-label">Tarefa Completa?</label>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-        <button class="btn btn-secondary" onclick="window.location.href='/api/v1/tasks'">
+        </form>
+        <button class="btn btn-secondary mt-2" onclick="window.location.href='/api/v1/tasks'">
           <i class="fas fa-arrow-left mt-1 me-1 float-start"></i>Voltar
         </button>
       </div>
     </div>
   </body>
 </html>
-<script src="/js/editScript.js"></script>
+<script src="/js/editScript.js" defer></script>
 <!--Bootstrap-->
 <script
   src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
