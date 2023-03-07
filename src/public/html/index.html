@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <!--Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!--FontAwesome-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="modal-div"></div>
+      <nav class="float text-secondary mt-4">
+        <h1>
+          <a href="#" class="title">
+            <img src="/svg/icon.svg" style="width: 50px" /> Lista de Tarefas
+          </a>
+          <button class="btn btn-dark float-end" id="login-modal-btn">Login</button>
+          <button class="btn btn-dark float-end" id="logout-btn">Logout</button>
+        </h1>
+      </nav>
+      <hr class="border border-primary border-3 opacity-75" />
+      <div class="mx-auto">
+        <!--form-->
+        <form id="create-task-form">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control w-50"
+              id="title-input"
+              placeholder="Tarefa"
+              required
+            />
+            <input type="datetime-local" class="form-control" id="date-input" />
+            <button type="submit" class="btn btn-outline-primary" id="add-btn" disabled>Add</button>
+          </div>
+        </form>
+        <!--tarefas-->
+        <div class="list-group text-center" id="tasks-list"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="/javascript/index.js" defer></script>
+<!--Bootstrap-->
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+  integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+  crossorigin="anonymous"
+></script>
