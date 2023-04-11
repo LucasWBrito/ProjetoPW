@@ -4,7 +4,7 @@ const path = require('path');
 const db = require('./db/db.json');
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
